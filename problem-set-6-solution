@@ -1,0 +1,365 @@
+
+/*
+ * Hello. SOLUTION.
+ */
+
+function sayHello() { // establishes sayHello as a function
+  let c = document.getElementById("canvas1"); // creates variable that links the js to the html allowing for a result to appear "canvas1".
+  let ctx = c.getContext("2d"); // sets the context for what will be drawn
+
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a rectangle to be drawn for "Hello, World!" to be drawn in. 
+  ctx.font = "48px sans-serif"; // sets the font and font size for "Hello, World!"
+  ctx.strokeText("Hello, World!", 10, 50); // tells the computer what will be drawn to the screen when the button is clicked. 
+}
+
+/*
+ * Rectangle. SOLUTION.
+ */
+
+function drawRectangle() { // establishes drawRectangle as a function
+  let height = Number(prompt("Height: ")); // creates a prompt for user to enter height
+  let width = Number(prompt("Width: ")); // creates a prompt for user to enter width
+  let x = Number(prompt("X: ")); // creates a prompt for user to enter a X value.
+  let y = Number(prompt("Y: ")); // creates a prompt for user to enter a Y value. 
+
+  let c = document.getElementById("canvas2"); // creates variable that links the js to the html allowing for a result to appear "canvas2".
+  let ctx = c.getContext("2d"); // sets the context for what will be drawn
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a rectangle to be drawn.
+
+  if (Number.isNaN(height) || Number.isNaN(width) || Number.isNaN(x) || Number.isNaN(y)) { // establishes an IF function for if any of the variables are NaN.
+    alert("One of your inputs is not a number."); // shows that one of the inputs is NaN.
+  } else if (width > 1023) { // says else  IF width is bigger than 1023.
+    alert("The rectangle will not fit on the canvas."); // displays that the rectangle won't fit in the canvas.
+  } else if (width < 1) { // establishes else  IF width is less than 1.
+    alert("Your width is too small."); // shows that the width is too small.
+  } else if (height > 511) { // establishes else  IF height is bigger than 511.
+    alert("The rectangle will not fit on the canvas."); // shows that the rectangle won't fit in the canvas.
+  } else if (height < 1) { // establishes else  IF height is less than 1.
+    alert("Your height is too small."); // shows that the rectangle's height is too small.
+  } else if ((width + x) > 1023) { // established else  IF x + width is greater than 1023.
+    alert("The rectangle will not fit on the canvas."); // says rectangle won't fit on the canvas.
+  } else if (x < 5) { // establishes else  IF x is less than 5.
+    alert("Your x-coordinate is too small."); // says that the X value is too small.
+  } else if ((height + y) > 511) { // establishes else  IF y + width is greater than 511.
+    alert("The rectangle will not fit on the canvas."); // says rectangle won't fit on the canvas.
+  } else if (y < 5) { // establishes else  IF y is less than 5.
+    alert("Your y-coordinate is too small."); // says that the Y value is too small.
+  } else { // establishes an else If statement
+    ctx.strokeRect(x, y, width, height); // uses the inputted values to draw the triangle
+  }
+}
+
+/*
+ * Color. SOLUTION.
+ */
+
+function drawColoredRectangle() { // establishes drawColoredRectangle as a function
+  let c = document.getElementById("canvas3"); // creates variable that links the js to the html allowing for a result to appear for "canvas3".
+  let ctx = c.getContext("2d"); // sets the context for what will be drawn
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a rectangle to be drawn
+
+  let color = prompt("Color: "); // prompts the user to enter a color
+  if (color === "black"  || // establishes if the color entered is equal to black
+      color === "blue"   || // establishes if the color entered is equal to blue
+      color === "green"  || // establishes if the color entered is equal to green
+      color === "orange" || // establishes if the color entered is equal to orange
+      color === "purple" || // establishes if the color entered is equal to purple
+      color === "red"    || // establishes if the color entered is equal to red
+      color === "yellow") { // establishes if the color entered is equal to yellow
+
+    ctx.fillStyle = color; // sets the fill of the shape to be equal to color
+    ctx.fillRect(10, 10, 100, 50); // sets the dimensions of the rectangle
+  } else { // establshes IF the value entered is not a color 
+    alert(color + " is not a supported color."); // shows that the value entered is not supported
+  }
+}
+
+/*
+ * Triangle. SOLUTION.
+ */
+
+function drawTriangle() { // establishes drawTriangle as a function
+  let c = document.getElementById("canvas4"); // creates variable that links the js to the html allowing for a result to appear for the id "canvas4".
+  let ctx = c.getContext("2d"); // sets the context for what will be drawn
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a canvas to be created
+
+  let s1 = Number(prompt("Side 1: ")); // prompts user to enter a number value for Side 1
+  let s2 = Number(prompt("Side 2: ")); // prompts user to enter a number value for Side 2
+  let s3 = Number(prompt("Side 3: ")); // prompts user to enter a number value for Side 3
+
+  if (Number.isNaN(s1) || Number.isNaN(s2) || Number.isNaN(s3)) { // establishes if one of the values is NaN
+    alert("One of your inputs is not a number."); // alerts user that one of the inputs is NaN
+  } else if (((s1 + s2) > s3) && ((s1 + s3) > s2) && ((s2 + s3) > s1)) { // establishes else IF s1 + s2 is greater than s3, s1 + s3 is greater than s2 or s2 + s3 is greater than s1
+      let side1 = Math.min(s1, s2, s3); // establishes that s1 is the smallest of the three sides
+      let side3 = Math.max(s1, s2, s3); // establishes than s3 is the biggest of the three sides
+      let side2 = (s1 + s2 + s3) - side1 - side3; // establishes s2 as (s1 + s2 + s3) - side1 - side3
+
+      if (((side1 * side1) + (side2 * side2)) === (side3 * side3)) { // establishes IF (((side1 * side1) + (side2 * side2)) === (side3 * side3))
+        let x = 10; // establishes x as 10
+        let y = 10; // establishes y as 10
+
+        if ((y + side1) > 511 || (x + side2) > 1023) { // establishes IF ((y + side1) > 511 || (x + side2) > 1023)
+          alert("The triangle will not fit on the canvas."); // alerts user that the triangle does not fit on the canvas.
+        } else { // establishes an else statement
+          ctx.beginPath(); // begins the drawing path for triangle
+
+          ctx.moveTo(x, y); // moves the drawing path to (10, 10)
+          ctx.lineTo(x, y + side1); // creates s1 of the triangle
+          ctx.lineTo(x + side2, y + side1); // creates s2 of the triangle
+          ctx.lineTo(x, y); // connects a line from x to y
+
+          ctx.closePath(); // ends the drawn line
+          ctx.stroke(); // finishes the line and also establishes the style and color of it
+        }
+      } else { // establishes an else statement 
+        alert("This is not a valid right triangle."); // tells the user that the values entered do not create a right triangle
+      }
+  } else { // establishes an else statement
+    alert("That is not a valid right triangle."); // tells the user that the values entered do not create a right triangle
+  }
+}
+
+/*
+ * Smile. SOLUTION.
+ */
+
+function drawSmileyFace() { // establishes drawSmileyFace as a function
+  let c = document.getElementById("canvas5"); // creates variable that links the js to the html allowing for a result to appear for the id "canvas5".
+  let ctx = c.getContext("2d"); // establishes the context of the drawing. 
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a canvas to be created
+
+  let radius = Number(prompt("Radius: ")); // prompts the user to enter a number value for the radius.
+
+  if (Number.isNaN(radius)) { // establishes IF radius is NaN
+    alert("Your input is not a number."); // alerts user that the inputted value is NaN.
+  } else if (radius < 1) { // establishes else IF radius is less than 1
+    alert("Your radius is too small."); // alerts user that the inputted value is too small
+  } else if ((radius * 2 + 10) > 511) { // establishes else IF ((radius * 2 + 10) > 511)
+    alert("The smiley face will not fit on the canvas."); // alerts user that the smiley face will not fit on the canvas
+  } else { // establishes an else statement
+    let faceX = radius + 10; // creates variable that is equal to "radius" + 10
+    let faceY = radius + 10; // creates variable that is equal to "radius" + 10
+
+    ctx.beginPath(); // tells the computer to begin drawing the smiley face
+
+    ctx.arc(faceX, faceY, radius, 0, Math.PI * 2, true);  // draws the face
+    ctx.moveTo(faceX + radius - radius * 0.3, faceY); // moves the drawer to create the mouth
+    ctx.arc(faceX, faceY, radius * 0.7, 0, Math.PI, false); // draws the mouth
+    ctx.moveTo(faceX - radius * 0.35 + radius * 0.1, faceY - radius * 0.5); // moves the drawer to create the left eye
+    ctx.arc(faceX - radius * 0.35, faceY - radius * 0.5, radius * 0.1, 0, Math.PI * 2, true); // draws the left eye
+    ctx.moveTo(faceX + radius * 0.35 + radius * 0.1, faceY - radius * 0.5); // moves the drawer to start the right eye
+    ctx.arc(faceX + radius * 0.35, faceY - radius * 0.5, radius * 0.1, 0, Math.PI * 2, true);  // draws the right eye
+
+    ctx.closePath(); // ends the path of the drawer
+    ctx.stroke(); // sets the color and style of what is drawn
+  }
+}
+
+/*
+ * Star. SOLUTION.
+ */
+
+function drawStar() { // establishes drawStar as a function
+  let c = document.getElementById("canvas6"); // creates variable that links the js to the html allowing for a result to appear for the id "canvas6".
+  let ctx = c.getContext("2d"); // establishes the context of the drawing.
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a canvas to be created
+
+
+  let pts = 5; // creates a variable that is equal to 5 for each point of the star
+  let x = 125; // creates a variable equal to 125
+  let y = 125; // creates a variable equal to 125
+
+  let outer = Number(prompt("Outer Radius: ")); // prompts the user to enter a number value for the outer radius of the star
+  let inner = Number(prompt("Inner Radius: ")); // prompts the user to enter a number value for the inner radius of the star
+
+  if (Number.isNaN(outer) || Number.isNaN(inner)) { // establishes IF the inputted values for inner or outer are NaN
+    alert("One of your inputs is not a number."); // alerts user that one of the inputs is NaN
+  } else if (outer < 2) { // establishes else IF outer is less than 2
+    alert("Your outer radius is too small."); // alerts user that the outer radius is too small 
+  } else if (inner < 1) { // establishes else IF inner is less than 1
+    alert("Your inner radius is too small."); // alerts user that the inner radius is too small
+  } else if (outer <= inner) { // establishes else IF outer is less than or equal to
+    alert("Your outer radius must be larger than your inner radius."); // alerts the user that the outer radius must be bigger than the inner radius. 
+  } else { // establishes an else statement
+    ctx.beginPath(); // begins path of the drawer
+
+    for (let vtx = 0; vtx <= 2 * pts; vtx++) { // establishes a for loop that creates a variable that is equal to 0, and untile the variable is greater than or equal to two, it will add one to itself for every loop
+
+      let radius; // creates a variable called radius
+      if (vtx % 2 == 0) { // creates an IF statement that if the remainder of vtx and 2 is equal to 0 than it is outer radius. 
+        radius = outer; // ^
+      } else { // establishes an IF statement that if the remainder of vtx and 2 is not equal to 0 than it is inner radius. 
+        radius = inner; // ^
+      }
+
+      ctx.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle)); // draws line  from each point to create the shape of the star
+    }
+
+    ctx.closePath(); // ends the drawers path
+    ctx.stroke(); // establishes an style or color for the figures drawn
+  }
+}
+
+/*
+ * Stop Sign. SOLUTION.
+ */
+
+function drawStopSign() { // establishes a function called drawStopSign
+  let c = document.getElementById("canvas7"); // creates variable that links the js to the html allowing for a result to appear for the id "canvas7".
+  let ctx = c.getContext("2d"); // establishes the context of the drawing.
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a canvas to be created
+
+  let x = 10; // creates a variable named x that is equal to 10.
+  let y = 150; // creates a variable named y that is equal to 150.
+  let length = 80; // creates a variable called length that is equal to 80.
+
+  ctx.beginPath(); // begins that path of the drawer for the drawing
+
+  ctx.moveTo(x, y); // moves the line from the value of 10 to 150. 
+  y = y - length; // sets the variable y to equal 150 - 80
+  ctx.lineTo(x, y); // draws a line from 10 to 70, since the value of y is also 70
+
+  let angle = 315.0; // sets a variable called angle to 315.0
+  for (let i = 0; i < 7; i++) { // creates a for loop that sets "i" equal to 0, and until it is greater than 7 it will add to itself by 1.
+    x = x + length * Math.cos(Math.PI * angle / 180.0); // sets the variable, "x" equal to x + length * Math.cos(Math.PI * angle / 180.0)
+    y = y + length * Math.sin(Math.PI * angle / 180.0); // sets the variable, "y" to  y + length * Math.sin(Math.PI * angle / 180.0)
+    ctx.lineTo(x, y); //  draws a a line from the new value of x to the new value of y
+
+    angle = angle + 45.0; // sets the variable, "angle" equal to 360.0
+    if (angle > 359.0) { // establishes an IF function that IF angle is greater than 359.0, then set the variable angle equal to angle - 360.0
+      angle = angle - 360.0;// ^
+    }
+  }
+
+  ctx.fillStyle = "red"; // sets the fill style of the shape to red
+  ctx.closePath(); // ends the path of the drawer 
+  ctx.fill(); // fills the shape
+
+  ctx.fillStyle = "white"; // fills the letters for "STOP" to white
+  ctx.font = "65px sans-serif"; // sets the font size and font for the letters
+  ctx.fillText("STOP", 18, 135); // positions the work "STOP" in the red hexagon
+}
+
+/*
+ * Pyramid. SOLUTION.
+ */
+
+function drawPyramid() { // establishes a function called drawPyramid
+  let c = document.getElementById("canvas8"); // creates variable that links the js to the html allowing for a result to appear for the id "canvas8".
+  let ctx = c.getContext("2d"); // establishes the context of the drawing.
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a canvas to be created
+
+  let length = Number(prompt("Length: ")); // prompts the user to enter a number value for the length
+
+  if (Number.isNaN(length)) { // established an IF statement for if length is NaN
+    alert("Your input is not a number."); // alerts the user that the input is NaN
+  } else if ((length * 5 + 10) > 1023 || (length * 5 + 10) > 511) { // establishes else IF ((length * 5 + 10) > 1023 or (length * 5 + 10) > 511)
+    alert("The pyramid will not fit on the canvas."); // alerts the user that the pyramid does not fit on the canvas
+  } else { // establishes an else statement
+    let x = 10; // creates a variable called x that has a value of 10
+    let y = c.height - 10 - length; // creates a variable called y equal to c.height - 10 - length
+
+    let offset = 0; // creates a variable called "offset" that is equal to 0
+    for (let n = 0; n < 5; n++) { // establishes a for loop that creates a variable that is equal to 0, and until the variable is greater than five it will add 1 to itself 
+      for (let o = 0; o < 5 - n; o++) { // establishes a for loop that creates a variable that is equal to 0, and until the variable is greater than 5 - n it will add 1 to itself
+        ctx.strokeRect(x + offset, y, length, length); // creates a drawing with the dimensions of each of the values
+        offset = offset + length; // sets offset equal to offset + length
+      }
+
+      x = x + Math.floor(length / 2); // sets x equal to x + Math.floor(length / 2)
+      y = y - length; // sets y equal to y - length
+      offset = 0; // sets offset equal to 0
+    }
+  }
+}
+
+/*
+ * House. SOLUTION.
+ */
+
+function drawHouse() { // establishes drawHouse as a function
+  let c = document.getElementById("canvas9"); // creates variable that links the js to the html allowing for a result to appear for the id "canvas9".
+  let ctx = c.getContext("2d"); // establishes the context of the drawing.
+  ctx.clearRect(0, 0, c.width, c.height); // gives directions for a canvas to be created
+
+  let house = prompt("House Color: "); // prompts user to enter a color for the house
+  let door = prompt("Front Door Color: "); // prompts user to enter a color for the front door
+
+  if ((house !== "blue"   && // creates an IF statement that says if house is not blue and brown and green and orange and purple and red and yellow
+       house !== "brown"  && // creates an IF statement that says if house is not blue and brown and green and orange and purple and red and yellow
+       house !== "green"  && // creates an IF statement that says if house is not blue and brown and green and orange and purple and red and yellow
+       house !== "orange" && // creates an IF statement that says if house is not blue and brown and green and orange and purple and red and yellow
+       house !== "purple" && // creates an IF statement that says if house is not blue and brown and green and orange and purple and red and yellow
+       house !== "red"    && // creates an IF statement that says if house is not blue and brown and green and orange and purple and red and yellow
+       house !== "yellow") || // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+      (door !== "blue"   && // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+       door !== "brown"  && // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+       door !== "green"  && // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+       door !== "orange" && // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+       door !== "purple" && // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+       door !== "red"    && // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow
+       door !== "yellow")) { // creates a nested IF statement that says if door is not blue or brown or green or orange or purple or red or yellow 
+
+    alert("One of your colors is not supported."); // alerts that color inputted is not supported
+  } else { // establishes an else statement 
+    let width = c.width - 300; // creates a variable called width that is equal to c.width - 300
+    let height = (c.height / 5) * 3; // creates a variable called height that is equal to (c.height / 5) * 3
+    let x = 150; // creates a variable called x that is equal to 150
+    let y = c.height - 10 - height; // creates a variable called y that is equal to c.height - 10 - height
+
+    // draw the frame
+    ctx.fillStyle = house; // 
+    ctx.fillRect(x, y, width, height);
+    ctx.strokeRect(x, y, width, height);
+
+    // draw the roof
+    ctx.beginPath(); // begins the path of drawer 
+    ctx.moveTo(x, y); // draws a line to (x, y)
+    ctx.lineTo(c.width / 2, 10); // draws the line to (c.width / 2, 10)
+    ctx.lineTo(c.width - 150, y); // draws the line to (c.width - 150, y)
+    ctx.lineTo(x, y); // draws a line to (x, y)
+    ctx.fillStyle = "gray"; // fills the house to the color of gray
+    ctx.fill(); // fills the house with the color
+    ctx.moveTo(x, y); // moves drawer to (x, y)
+    ctx.lineTo(c.width / 2, 10); // draws the line to (c.width / 2, 10)
+    ctx.lineTo(c.width - 150, y); // draws the line to (c.width - 150, y)
+    // ctx.lineTo(x, y);
+    ctx.closePath(); // ends the path of the drawer
+    ctx.stroke(); // constitutes for the style and color of the lines
+
+    // draw the door
+    ctx.fillStyle = "gold"; // sets the fill color to gold
+    ctx.fillRect(c.width / 2 - 50, (c.height / 5) * 4 - 9, 100, 150); // fills the rectanganle at the position of (c.width / 2 - 50, (c.height / 5) * 4 - 9, 100, 150)
+    ctx.beginPath(); // begins the path of the drawer 
+    ctx.moveTo(c.width / 2 - 50, (c.height / 5) * 4 - 9); // moves the drawer to (c.width / 2 - 50, (c.height / 5) * 4 - 9)
+    ctx.lineTo(c.width / 2 + 50, (c.height / 5) * 4 - 9); // draws a line to (c.width / 2 + 50, (c.height / 5) * 4 - 9)
+    ctx.lineTo(c.width / 2 + 50, c.height - 10); // draws a line to (c.width / 2 + 50, c.height - 10)
+    ctx.lineTo(c.width / 2 - 50, c.height - 10); // draws a line to (c.width / 2 - 50, c.height - 10)
+    ctx.lineTo(c.width / 2 - 50, (c.height / 5) * 4 - 9); // draws a line to (c.width / 2 - 50, (c.height / 5) * 4 - 9)
+    ctx.moveTo(c.width / 2 + 42, (c.height / 5) * 4 - 9 + 80); // moves the drawer to (c.width / 2 + 42, (c.height / 5) * 4 - 9 + 80)
+    ctx.arc(c.width / 2 + 35, (c.height / 5) * 4 - 9 + 80, 7, 0, Math.PI * 2, true); // 
+    ctx.fillStyle = door; // sets the fill style to the door
+    ctx.fill(); // fills the door
+    ctx.moveTo(c.width / 2 - 50, (c.height / 5) * 4 - 9); // moves the drawer to (c.width / 2 - 50, (c.height / 5) * 4 - 9)
+    ctx.lineTo(c.width / 2 + 50, (c.height / 5) * 4 - 9); // draws the line to (c.width / 2 + 50, (c.height / 5) * 4 - 9)
+    ctx.lineTo(c.width / 2 + 50, c.height - 10); // draws the line to (c.width / 2 + 50, c.height - 10)
+    ctx.lineTo(c.width / 2 - 50, c.height - 10); // draws the line to (c.width / 2 - 50, c.height - 10)
+    ctx.lineTo(c.width / 2 - 50, c.height - 10); // draws the line to (c.width / 2 - 50, c.height - 10)
+    ctx.lineTo(c.width / 2 - 50, (c.height / 5) * 4 - 9); draws the line to (c.width / 2 - 50, (c.height / 5) * 4 - 9)
+    ctx.moveTo(c.width / 2 + 42, (c.height / 5) * 4 - 9 + 80); // moves the drawer to (c.width / 2 + 42, (c.height / 5) * 4 - 9 + 80)
+    ctx.arc(c.width / 2 + 35, (c.height / 5) * 4 - 9 + 80, 7, 0, Math.PI * 2, true); //
+    ctx.stroke(); // constitutes for the style and color of the lines
+
+    // draw windows
+    ctx.fillStyle = "lightBlue"; // sets the fill color to "lightBlue"
+    ctx.fillRect(150 + 120, (c.height / 5) * 4 - 9 + 35, 80, 80); // fills the rectangle at (150 + 120, (c.height / 5) * 4 - 9 + 35, 80, 80
+    ctx.fillRect(c.width - 150 - 80 - 120, (c.height / 5) * 4 - 9 + 35, 80, 80); // fills the rectangle at (c.width - 150 - 80 - 120, (c.height / 5) * 4 - 9 + 35, 80, 80)
+    ctx.fillRect(150 + 120, (c.height / 5) * 2.5, 80, 80); // fills the rectangle at (150 + 120, (c.height / 5) * 2.5, 80, 80)
+    ctx.fillRect(c.width - 150 - 80 - 120, (c.height / 5) * 2.5, 80, 80); // fills the rectangle at (c.width - 150 - 80 - 120, (c.height / 5) * 2.5, 80, 80)
+
+    ctx.strokeRect(150 + 120, (c.height / 5) * 4 - 9 + 35, 80, 80); // constitutes for the style of the rectangle at (150 + 120, (c.height / 5) * 4 - 9 + 35, 80, 80)
+    ctx.strokeRect(c.width - 150 - 80 - 120, (c.height / 5) * 4 - 9 + 35, 80, 80); // constitutes for the style of the rectangle at (c.width - 150 - 80 - 120, (c.height / 5) * 4 - 9 + 35, 80, 80)
+    ctx.strokeRect(150 + 120, (c.height / 5) * 2.5, 80, 80); // constitutes for the style of the rectangle at (150 + 120, (c.height / 5) * 2.5, 80, 80)
+    ctx.strokeRect(c.width - 150 - 80 - 120, (c.height / 5) * 2.5, 80, 80); // constitutes for the style of the rectangle at (c.width - 150 - 80 - 120, (c.height / 5) * 2.5, 80, 80)
+  }
+}
